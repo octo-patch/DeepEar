@@ -158,7 +158,11 @@ def get_model(model_provider: str, model_id: str, **kwargs):
             api_key=api_key,
             base_url=base_url,
             role_map=role_map,
-            extra_body={"enable_thinking": thinking_mode != "disabled"},
+            extra_body=(
+                {"thinking": {"type": thinking_mode}}
+                if thinking_mode != "always_on"
+                else {}
+            ),
             **kwargs
         )
 
